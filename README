@@ -1,0 +1,4 @@
+# Shogi Wars / Shogi-Extend Utils
+
+sw_kifus_fetch.py - fetch the most recent 10 kifus
+  usage: ./sw_kifus_fetch.py [output_directory] [username]
