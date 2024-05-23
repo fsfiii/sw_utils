@@ -21,9 +21,13 @@ r = requests.get(url)
 kifu_urls = [g['kifu_url'] for g in r.json()['game_list']]
 
 for kurl in kifu_urls:
-    kur = requests.get(kurl)
-    kif = kur.text
-    path = output_dir + '/' + kurl.split('/')[-1]
-    print('writing kifu: %s' % path)
-    with open(path, 'w') as kif_file:
-        kif_file.write(kif)
+    name = kurl.split('/')[-1]
+    path = output_dir + '/' + name
+    if not os.path.exists(path):
+        print('fetching and writing kifu: %s' % name)
+        kur = requests.get(kurl)
+        kif = kur.text
+        with open(path, 'w') as kif_file:
+            kif_file.write(kif)
+    else:
+        print('ignoring existing kifu: %s' % name)
